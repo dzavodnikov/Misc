@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type"         content="text/html; charset=UTF-8"  />
+    <meta http-equiv="Content-Script-Type"  content="text/javascript"           />
+    
+    <link rel="stylesheet" media="screen" href="/css/bootstrap.css" />
+    
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/knockout.js"></script>
+    
+    <title>Table with Records</title>
+</head>
+<body>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+	           <th>Date</th>
+	           <th>User</th>
+	           <th>Event</th>
+	        </tr>
+	    </thead>
+	    <tbody data-bind="foreach: records">
+		    <tr>
+		        <td data-bind="text: date"></td>
+		        <td data-bind="text: name"></td>
+		        <td data-bind="text: event"></td>
+		    </tr>    
+		</tbody>
+    </table>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+    var second = 1000;
+    var records = ko.observableArray([]);
+
+    function populateRecords() {
+    	$.getJSON("/records", function(data) {
+            records(data);
+            
+            setTimeout(populateRecords, 1 * second);
+        });
+    }
+
+    function ReservationsViewModel(records) {
+        var self = this;
+
+        self.records = records;
+        
+        populateRecords();
+    }
+
+    ko.applyBindings(new ReservationsViewModel(records));
+    /*]]>*/
+    </script>
+</body>
+</html>

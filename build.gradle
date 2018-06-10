@@ -1,0 +1,79 @@
+apply plugin: 'java'
+
+tasks.withType(JavaCompile) {
+    // See: 
+    //      https://stackoverflow.com/questions/21028438/
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    // See: 
+    //      https://mrhaki.blogspot.ru/2012/06/gradle-goodness-set-java-compiler.html
+    options.encoding = 'UTF-8'
+}
+
+test {
+     maxHeapSize = '512m' // To be compatible with Travis-CI infrastructure.
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        name    'JitPack'
+        url     'https://jitpack.io/' 
+    }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.javatuples/javatuples
+    compile group: 'org.javatuples', name: 'javatuples', version: '1.2'
+
+    // https://mvnrepository.com/artifact/net.sf.jopt-simple/jopt-simple
+    compile group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '5.0.4'
+
+    // https://mvnrepository.com/artifact/com.sparkjava/spark-core
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.1'
+
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.4'
+
+    // https://mvnrepository.com/artifact/io.swagger/swagger-models
+    compile group: 'io.swagger', name: 'swagger-models', version: '1.5.18'
+
+    // https://mvnrepository.com/artifact/net.sf.expectit/expectit-core
+    compile group: 'net.sf.expectit', name: 'expectit-core', version: '0.9.0'
+
+    // https://mvnrepository.com/artifact/it.unimi.dsi/fastutil
+    compile group: 'it.unimi.dsi', name: 'fastutil', version: '8.1.1'
+
+    // https://mvnrepository.com/artifact/it.unibo.alice.tuprolog/tuprolog
+    compile group: 'it.unibo.alice.tuprolog', name: 'tuprolog', version: '3.2.1'
+
+    // https://mvnrepository.com/artifact/junit/junit
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+apply plugin: 'eclipse'
+
+// See: 
+//      https://stackoverflow.com/questions/32340929/
+allprojects {
+    eclipse.project {
+        natures 'org.eclipse.buildship.core.gradleprojectnature'
+    }
+}
+
+// See: 
+//      https://stackoverflow.com/questions/10156847/
+eclipse.classpath {
+    downloadSources = true
+    downloadJavadoc = true
+}
