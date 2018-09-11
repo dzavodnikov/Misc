@@ -11,5 +11,7 @@ public interface INArrayPointer {
 
     int getPosition();
 
-    int getLength();
+    int getDimension(int dimensionNum);
+
+    int getDimensionsNum();
 }

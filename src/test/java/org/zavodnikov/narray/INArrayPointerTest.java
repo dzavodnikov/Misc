@@ -35,16 +35,63 @@ import org.junit.Test;
 public class INArrayPointerTest {
 
     @Test
-    public void test1() {
-        INArrayPointer p;
+    public void test_d1_i1() {
+        final INArrayPointer p = new FlatNArrayPointer(1);
+        assertEquals(1, p.getDimensionsNum());
+        assertEquals(1, p.getDimension(0));
 
-        p = new FlatNArrayPointer(1, 1);
-        assertEquals(1, p.getLength());
+        assertEquals(0, p.getPosition());
 
-        p = new FlatNArrayPointer(2, 1);
-        assertEquals(2, p.getLength());
+        p.setIndex(0, 0);
+        assertEquals(0, p.getPosition());
+    }
 
-        p = new FlatNArrayPointer(3, 1);
-        assertEquals(3, p.getLength());
+    @Test
+    public void test_d1_i2() {
+        final INArrayPointer p = new FlatNArrayPointer(2);
+        assertEquals(1, p.getDimensionsNum());
+        assertEquals(2, p.getDimension(0));
+
+        assertEquals(0, p.getPosition());
+
+        p.setIndex(0, 0);
+        assertEquals(0, p.getPosition());
+
+        p.setIndex(0, 1);
+        assertEquals(1, p.getPosition());
+    }
+
+    @Test
+    public void test_d1_i3() {
+        final INArrayPointer p = new FlatNArrayPointer(3);
+        assertEquals(1, p.getDimensionsNum());
+        assertEquals(3, p.getDimension(0));
+
+        assertEquals(0, p.getPosition());
+
+        p.setIndex(0, 0);
+        assertEquals(0, p.getPosition());
+
+        p.setIndex(0, 1);
+        assertEquals(1, p.getPosition());
+
+        p.setIndex(0, 2);
+        assertEquals(2, p.getPosition());
+    }
+
+    @Test
+    public void test_d1_iN() {
+        final int N = 100;
+
+        final INArrayPointer p = new FlatNArrayPointer(N);
+        assertEquals(1, p.getDimensionsNum());
+        assertEquals(N, p.getDimension(0));
+
+        assertEquals(0, p.getPosition());
+
+        for (int i = 0; i < N; ++i) {
+            p.setIndex(0, i);
+            assertEquals(i, p.getPosition());
+        }
     }
 }
