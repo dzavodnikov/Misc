@@ -9,6 +9,8 @@ public interface INArrayPointer {
 
     void setIndex(int dimensionNum, int index);
 
+    int getLength();
+
     int getPosition();
 
     int getDimension(int dimensionNum);

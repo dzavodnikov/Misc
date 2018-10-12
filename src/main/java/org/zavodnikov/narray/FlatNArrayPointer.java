@@ -30,19 +30,21 @@ public class FlatNArrayPointer implements INArrayPointer {
     }
 
     private void initOffsets() {
-        for (int i = 0; i < getDimensionsNum(); ++i) {
-            this.offsets[i] = 1;
+        for (int i = getDimensionsNum() - 1; i >= 0; --i) {
+            long offset = 1;
 
-            for (int j = i + 1; j < getDimensionsNum(); ++j) {
-                this.offsets[i] *= getDimension(j);
+            for (int j = i - 1; j >= 0; --j) {
+                offset *= getDimension(j);
+
+                final long maxPosition = offset * getDimension(i);
+                if (maxPosition > Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException(
+                        "Can not address such array -- size will be more than can be addressed!");
+                }
             }
-        }
 
-        // TODO
-        for (int i = 0; i < getDimensionsNum(); ++i) {
-            System.out.print(String.format("%d ", this.offsets[i]));
+            this.offsets[i] = (int) offset;
         }
-        System.out.println();
     }
 
     public FlatNArrayPointer(final int... dimensions) {
@@ -102,12 +104,20 @@ public class FlatNArrayPointer implements INArrayPointer {
     }
 
     @Override
+    public int getLength() {
+        final int latestDim = getDimensionsNum() - 1;
+        return this.offsets[latestDim] * getDimension(latestDim);
+    }
+
+    @Override
     public int getPosition() {
         return this.pointer;
     }
 
     @Override
     public int getDimension(final int dimensionNum) {
+        checkDimensionValue(dimensionNum);
+
         return this.dimentsions[dimensionNum];
     }
 
