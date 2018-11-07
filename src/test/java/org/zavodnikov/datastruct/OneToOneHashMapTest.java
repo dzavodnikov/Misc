@@ -37,7 +37,7 @@ import org.junit.Test;
 public class OneToOneHashMapTest {
 
     @Test
-    public void testPutDifferent() {
+    public void testPutDifferentKeysAndValues() {
         final OneToOneHashMap<String, Integer> map = new OneToOneHashMap<>();
         assertEquals(0, map.size());
         assertTrue(map.isEmpty());
