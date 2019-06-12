@@ -24,6 +24,9 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
     // https://mvnrepository.com/artifact/org.javatuples/javatuples
     compile group: 'org.javatuples', name: 'javatuples', version: '1.2'
 
