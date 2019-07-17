@@ -1,21 +1,18 @@
-# Java binary-files
-*.class
-
 # Java crashes
 hs_err_pid*
 
 # Gradle
-build/
-.gradle/
+.gradle
+**/build
 
 # Eclipse Core
 .project
-.settings/
+**/.settings
 
 # Eclipse JDT (Java Development Tools)
 .classpath
-bin/
+**/bin
 
 # NetBeans Gradle
-.nb-gradle/
+**/.nb-gradle
 
