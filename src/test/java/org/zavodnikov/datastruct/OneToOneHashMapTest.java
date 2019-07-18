@@ -50,19 +50,19 @@ public class OneToOneHashMapTest {
         assertFalse(map.isEmpty());
 
         assertTrue(map.containsKey("1"));
-        assertTrue(map.containsValue(new Integer(1)));
-        assertEquals(new Integer(1), map.get("1"));
-        assertEquals("1", map.getValueKey(new Integer(1)));
+        assertTrue(map.containsValue(Integer.valueOf(1)));
+        assertEquals(Integer.valueOf(1), map.get("1"));
+        assertEquals("1", map.getValueKey(Integer.valueOf(1)));
 
         assertTrue(map.containsKey("2"));
-        assertTrue(map.containsValue(new Integer(2)));
-        assertEquals(new Integer(2), map.get("2"));
-        assertEquals("2", map.getValueKey(new Integer(2)));
+        assertTrue(map.containsValue(Integer.valueOf(2)));
+        assertEquals(Integer.valueOf(2), map.get("2"));
+        assertEquals("2", map.getValueKey(Integer.valueOf(2)));
 
         assertTrue(map.containsKey("3"));
-        assertTrue(map.containsValue(new Integer(3)));
-        assertEquals(new Integer(3), map.get("3"));
-        assertEquals("3", map.getValueKey(new Integer(3)));
+        assertTrue(map.containsValue(Integer.valueOf(3)));
+        assertEquals(Integer.valueOf(3), map.get("3"));
+        assertEquals("3", map.getValueKey(Integer.valueOf(3)));
     }
 
     @Test
@@ -79,9 +79,9 @@ public class OneToOneHashMapTest {
         assertFalse(map.isEmpty());
 
         assertTrue(map.containsKey("1"));
-        assertTrue(map.containsValue(new Integer(3)));
-        assertEquals(new Integer(3), map.get("1"));
-        assertEquals("1", map.getValueKey(new Integer(3)));
+        assertTrue(map.containsValue(Integer.valueOf(3)));
+        assertEquals(Integer.valueOf(3), map.get("1"));
+        assertEquals("1", map.getValueKey(Integer.valueOf(3)));
     }
 
     @Test
@@ -98,9 +98,9 @@ public class OneToOneHashMapTest {
         assertFalse(map.isEmpty());
 
         assertTrue(map.containsKey("3"));
-        assertTrue(map.containsValue(new Integer(1)));
-        assertEquals(new Integer(1), map.get("3"));
-        assertEquals("3", map.getValueKey(new Integer(1)));
+        assertTrue(map.containsValue(Integer.valueOf(1)));
+        assertEquals(Integer.valueOf(1), map.get("3"));
+        assertEquals("3", map.getValueKey(Integer.valueOf(1)));
     }
 
     @Test
@@ -121,8 +121,8 @@ public class OneToOneHashMapTest {
         assertEquals(1, map.size());
 
         assertTrue(map.containsKey("3"));
-        assertTrue(map.containsValue(new Integer(3)));
-        assertEquals(new Integer(3), map.get("3"));
-        assertEquals("3", map.getValueKey(new Integer(3)));
+        assertTrue(map.containsValue(Integer.valueOf(3)));
+        assertEquals(Integer.valueOf(3), map.get("3"));
+        assertEquals("3", map.getValueKey(Integer.valueOf(3)));
     }
 }

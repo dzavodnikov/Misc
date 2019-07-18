@@ -39,6 +39,6 @@ public class DoubleOperand implements Operand<Double> {
 
     @Override
     public Double execute() {
-        return new Double(this.value);
+        return Double.valueOf(this.value);
     }
 }
