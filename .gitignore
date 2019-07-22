@@ -1,18 +1,15 @@
-# Java crashes
-hs_err_pid*
+# Ignore all .-files and .-folders
+.*
+
+# Save gitignore
+!/.gitignore
 
 # Gradle
-.gradle
-**/build
+build/
 
-# Eclipse Core
-.project
-**/.settings
+# Maven
+target/
 
 # Eclipse JDT (Java Development Tools)
-.classpath
-**/bin
-
-# NetBeans Gradle
-**/.nb-gradle
+bin/
 

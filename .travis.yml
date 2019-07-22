@@ -1,14 +1,14 @@
 language: java
 
 jdk:
-  - oraclejdk8
+    - oraclejdk11
 
 env:
-  global:
-    JAVA_OPTS=-Xmx512m
+    global:
+        JAVA_OPTS=-Xmx512m
 
 notifications:
-  email:
-    recipients:
-      - D.Zavodnikov@GMail.com
+    email:
+        recipients:
+            - D.Zavodnikov@GMail.com
 
