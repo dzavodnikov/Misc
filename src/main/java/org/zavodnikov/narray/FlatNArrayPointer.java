@@ -8,121 +8,116 @@ public class FlatNArrayPointer implements INArrayPointer {
     // Number of dimensions into the source n-dimension array.
     private final int[] dimentsions;
 
+    // Index values.
+    private final int[] indexes;
+    
     // Pre-calculated offsets for better performance.
     private final int[] offsets;
 
-    // Index values.
-    private final int[] indexes;
-
-    // Pointer in target array.
+    // Pre-calculated pointer in target array for better performance.
     private int         pointer;
 
-    // Copy to prevent side effects.
-    private void copyDimensionsWithChecking(final int[] dimensions) {
-        for (int i = 0; i < getDimensionsNum(); ++i) {
-            if (dimensions[i] == 0) {
-                throw new IllegalArgumentException(
-                    String.format("Dimension \"%d\" can not be less or equals that 0 (= %d)!", i, dimensions[i]));
-            }
-
-            this.dimentsions[i] = dimensions[i];
-        }
-    }
-
-    private void initOffsets() {
-        for (int i = getDimensionsNum() - 1; i >= 0; --i) {
-            long offset = 1;
-
-            for (int j = i - 1; j >= 0; --j) {
-                offset *= getDimension(j);
-
-                final long maxPosition = offset * getDimension(i);
-                if (maxPosition > Integer.MAX_VALUE) {
-                    throw new IllegalArgumentException(
-                        "Can not address such array -- size will be more than can be addressed!");
-                }
-            }
-
-            this.offsets[i] = (int) offset;
-        }
-    }
 
     public FlatNArrayPointer(final int... dimensions) {
-        if (dimensions.length == 0) {
+        if (dimensions == null || dimensions.length == 0) {
             throw new IllegalArgumentException("You are should define at least 1 dimension!");
         }
+        
+        this.offsets = new int[dimensions.length];
+        
         this.dimentsions = new int[dimensions.length];
-        copyDimensionsWithChecking(dimensions);
+        for (int i = 0; i < dimensions(); ++i) {
+        	dimension(i, dimensions[i]);
+        }
 
-        this.offsets = new int[getDimensionsNum()];
-        initOffsets();
-
-        this.indexes = new int[getDimensionsNum()];
+        this.indexes = new int[dimensions.length];
+        this.pointer = 0;
     }
-
-    @Override
-    public int getIndex(final int dimensionNum, final int index) {
-        return this.indexes[dimensionNum];
-    }
-
+    
     private void checkDimensionValue(final int dimensionNum) {
         if (dimensionNum < 0) {
             throw new IllegalArgumentException(
                 String.format("Dimension number (=\"%d\") can not be less than 0!", dimensionNum));
         }
-        if (dimensionNum >= getDimensionsNum()) {
+        if (dimensionNum >= dimensions()) {
             throw new IllegalArgumentException(
                 String.format("Dimension number (=\"%d\") can not be more or equals than dimension size (=%d)!",
-                    dimensionNum, getDimensionsNum()));
+                    dimensionNum, dimensions()));
         }
     }
+    
+    private void offset(final int dimensionNum) {
+        long offset = 1;
 
-    private void checkIndexValue(final int dimensionNum, final int index) {
-        if (index < 0) {
-            throw new IllegalArgumentException(String.format("Index (=\"%d\") can not be less than 0!", index));
+        for (int j = dimensionNum - 1; j >= 0; --j) {
+            offset *= dimension(j);
+
+            final long maxPosition = offset * dimension(dimensionNum);
+            if (maxPosition > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException(
+                    "Can not address such array -- size will be more than can be addressed!");
+            }
         }
-        if (index > getDimension(dimensionNum)) {
-            throw new IllegalArgumentException(String.format(
-                "Index (=\"%d\") can not be more that dimension size (=%d)!", index, getDimension(dimensionNum)));
+
+        this.offsets[dimensionNum] = (int) offset;
+    }
+    
+	@Override
+	public void dimension(int dimensionNum, int dimensionSize) {
+		checkDimensionValue(dimensionNum);
+    	if (dimensionSize == 0) {
+            throw new IllegalArgumentException(
+                String.format("Dimension \"%d\" can not be less or equals that 0 (= %d)!", dimensionNum, dimensionSize));
         }
-    }
-
-    private void updatePointerValue(final int dimensionNum, final int index) {
-        this.pointer += (index - this.indexes[dimensionNum]) * this.offsets[dimensionNum];
-    }
-
-    private void setPointerValue(final int dimensionNum, final int index) {
-        this.indexes[dimensionNum] = index;
-    }
+		
+		this.dimentsions[dimensionNum] = dimensionSize;
+		offset(dimensionNum);
+	}
 
     @Override
-    public void setIndex(final int dimensionNum, final int index) {
-        checkDimensionValue(dimensionNum);
-        checkIndexValue(dimensionNum, index);
-        updatePointerValue(dimensionNum, index);
-        setPointerValue(dimensionNum, index);
-    }
-
-    @Override
-    public int getLength() {
-        final int latestDim = getDimensionsNum() - 1;
-        return this.offsets[latestDim] * getDimension(latestDim);
-    }
-
-    @Override
-    public int getPosition() {
-        return this.pointer;
-    }
-
-    @Override
-    public int getDimension(final int dimensionNum) {
+    public int dimension(final int dimensionNum) {
         checkDimensionValue(dimensionNum);
 
         return this.dimentsions[dimensionNum];
     }
 
     @Override
-    public int getDimensionsNum() {
+    public int dimensions() {
         return this.dimentsions.length;
+    }
+	
+    @Override
+    public int size() {
+        final int latestDim = dimensions() - 1;
+        return this.offsets[latestDim] * dimension(latestDim);
+    }
+   
+
+    @Override
+    public void index(final int dimensionNum, final int index) {
+        checkDimensionValue(dimensionNum);
+        if (index < 0) {
+            throw new IllegalArgumentException(String.format("Index (=\"%d\") can not be less than 0!", index));
+        }
+        if (index > dimension(dimensionNum)) {
+            throw new IllegalArgumentException(String.format(
+                "Index (=\"%d\") can not be more that dimension size (=%d)!", index, dimension(dimensionNum)));
+        }
+        
+        this.pointer += (index - this.indexes[dimensionNum]) * this.offsets[dimensionNum];
+        
+        this.indexes[dimensionNum] = index;
+    }
+    
+    @Override
+    public int index(final int dimensionNum) {
+    	checkDimensionValue(dimensionNum);
+    	
+        return this.indexes[dimensionNum];
+    }
+
+    @Override
+    public int index() {
+        return this.pointer;
     }
 }

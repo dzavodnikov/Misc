@@ -45,18 +45,18 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
         for (int i = 0; i < N; ++i) {
-            pointer.setIndex(0, i);
+            pointer.index(0, i);
 
-            assertEquals(sum, pointer.getPosition());
+            assertEquals(sum, pointer.index());
 
             ++sum;
         }
@@ -73,20 +73,20 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
         for (int j = 0; j < N; ++j) {
             for (int i = 0; i < N; ++i) {
-                pointer.setIndex(0, i);
-                pointer.setIndex(1, j);
+                pointer.index(0, i);
+                pointer.index(1, j);
 
-                assertEquals(sum, pointer.getPosition());
+                assertEquals(sum, pointer.index());
 
                 ++sum;
             }
@@ -104,24 +104,24 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
-        assertEquals(0, pointer.getPosition());
+        assertEquals(0, pointer.index());
 
         int sum = 0;
         for (int k = 0; k < N; ++k) {
             for (int j = 0; j < N; ++j) {
                 for (int i = 0; i < N; ++i) {
-                    pointer.setIndex(0, i);
-                    pointer.setIndex(1, j);
-                    pointer.setIndex(2, k);
+                    pointer.index(0, i);
+                    pointer.index(1, j);
+                    pointer.index(2, k);
 
-                    assertEquals(sum, pointer.getPosition());
+                    assertEquals(sum, pointer.index());
 
                     ++sum;
                 }
@@ -140,11 +140,11 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
@@ -152,12 +152,12 @@ public class INArrayPointerTest {
             for (int k = 0; k < N; ++k) {
                 for (int j = 0; j < N; ++j) {
                     for (int i = 0; i < N; ++i) {
-                        pointer.setIndex(0, i);
-                        pointer.setIndex(1, j);
-                        pointer.setIndex(2, k);
-                        pointer.setIndex(3, l);
+                        pointer.index(0, i);
+                        pointer.index(1, j);
+                        pointer.index(2, k);
+                        pointer.index(3, l);
 
-                        assertEquals(sum, pointer.getPosition());
+                        assertEquals(sum, pointer.index());
 
                         ++sum;
                     }
@@ -177,11 +177,11 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
@@ -190,13 +190,13 @@ public class INArrayPointerTest {
                 for (int k = 0; k < N; ++k) {
                     for (int j = 0; j < N; ++j) {
                         for (int i = 0; i < N; ++i) {
-                            pointer.setIndex(0, i);
-                            pointer.setIndex(1, j);
-                            pointer.setIndex(2, k);
-                            pointer.setIndex(3, l);
-                            pointer.setIndex(4, m);
+                            pointer.index(0, i);
+                            pointer.index(1, j);
+                            pointer.index(2, k);
+                            pointer.index(3, l);
+                            pointer.index(4, m);
 
-                            assertEquals(sum, pointer.getPosition());
+                            assertEquals(sum, pointer.index());
 
                             ++sum;
                         }
@@ -217,11 +217,11 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
@@ -231,14 +231,14 @@ public class INArrayPointerTest {
                     for (int k = 0; k < N; ++k) {
                         for (int j = 0; j < N; ++j) {
                             for (int i = 0; i < N; ++i) {
-                                pointer.setIndex(0, i);
-                                pointer.setIndex(1, j);
-                                pointer.setIndex(2, k);
-                                pointer.setIndex(3, l);
-                                pointer.setIndex(4, m);
-                                pointer.setIndex(5, n);
+                                pointer.index(0, i);
+                                pointer.index(1, j);
+                                pointer.index(2, k);
+                                pointer.index(3, l);
+                                pointer.index(4, m);
+                                pointer.index(5, n);
 
-                                assertEquals(sum, pointer.getPosition());
+                                assertEquals(sum, pointer.index());
 
                                 ++sum;
                             }
@@ -260,11 +260,11 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
@@ -274,14 +274,14 @@ public class INArrayPointerTest {
                     for (int k = 0; k < N; ++k) {
                         for (int j = 0; j < N; ++j) {
                             for (int i = 0; i < N; ++i) {
-                                pointer.setIndex(0, i);
-                                pointer.setIndex(1, j);
-                                pointer.setIndex(2, k);
-                                pointer.setIndex(3, l);
-                                pointer.setIndex(4, m);
-                                pointer.setIndex(5, n);
+                                pointer.index(0, i);
+                                pointer.index(1, j);
+                                pointer.index(2, k);
+                                pointer.index(3, l);
+                                pointer.index(4, m);
+                                pointer.index(5, n);
 
-                                assertEquals(sum, pointer.getPosition());
+                                assertEquals(sum, pointer.index());
 
                                 ++sum;
                             }
@@ -303,11 +303,11 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
@@ -318,15 +318,15 @@ public class INArrayPointerTest {
                         for (int k = 0; k < N; ++k) {
                             for (int j = 0; j < N; ++j) {
                                 for (int i = 0; i < N; ++i) {
-                                    pointer.setIndex(0, i);
-                                    pointer.setIndex(1, j);
-                                    pointer.setIndex(2, k);
-                                    pointer.setIndex(3, l);
-                                    pointer.setIndex(4, m);
-                                    pointer.setIndex(5, n);
-                                    pointer.setIndex(6, o);
+                                    pointer.index(0, i);
+                                    pointer.index(1, j);
+                                    pointer.index(2, k);
+                                    pointer.index(3, l);
+                                    pointer.index(4, m);
+                                    pointer.index(5, n);
+                                    pointer.index(6, o);
 
-                                    assertEquals(sum, pointer.getPosition());
+                                    assertEquals(sum, pointer.index());
 
                                     ++sum;
                                 }
@@ -349,11 +349,11 @@ public class INArrayPointerTest {
         }
 
         final INArrayPointer pointer = new FlatNArrayPointer(dimArr);
-        assertEquals(D, pointer.getDimensionsNum());
-        assertEquals((int) Math.pow(N, D), pointer.getLength());
+        assertEquals(D, pointer.dimensions());
+        assertEquals((int) Math.pow(N, D), pointer.size());
 
         for (int i = 0; i < D; ++i) {
-            assertEquals(N, pointer.getDimension(i));
+            assertEquals(N, pointer.dimension(i));
         }
 
         int sum = 0;
@@ -365,16 +365,16 @@ public class INArrayPointerTest {
                             for (int k = 0; k < N; ++k) {
                                 for (int j = 0; j < N; ++j) {
                                     for (int i = 0; i < N; ++i) {
-                                        pointer.setIndex(0, i);
-                                        pointer.setIndex(1, j);
-                                        pointer.setIndex(2, k);
-                                        pointer.setIndex(3, l);
-                                        pointer.setIndex(4, m);
-                                        pointer.setIndex(5, n);
-                                        pointer.setIndex(6, o);
-                                        pointer.setIndex(7, p);
+                                        pointer.index(0, i);
+                                        pointer.index(1, j);
+                                        pointer.index(2, k);
+                                        pointer.index(3, l);
+                                        pointer.index(4, m);
+                                        pointer.index(5, n);
+                                        pointer.index(6, o);
+                                        pointer.index(7, p);
 
-                                        assertEquals(sum, pointer.getPosition());
+                                        assertEquals(sum, pointer.index());
 
                                         ++sum;
                                     }

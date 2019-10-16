@@ -4,16 +4,18 @@ package org.zavodnikov.narray;
  * @author Dmitry Zavodnikov (d.zavodnikov@gmail.com)
  */
 public interface INArrayPointer {
+	
+	void dimension(int dimensionNum, int dimensionSize);
+	
+	int dimension(int dimensionNum);
+	
+	int dimensions();
 
-    int getIndex(int dimensionNum, int index);
+    int size();
+    
+	void index(int dimensionNum, int index);
 
-    void setIndex(int dimensionNum, int index);
+    int index(int dimensionNum);
 
-    int getLength();
-
-    int getPosition();
-
-    int getDimension(int dimensionNum);
-
-    int getDimensionsNum();
+    int index();
 }
