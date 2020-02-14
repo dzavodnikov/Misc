@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -68,8 +67,8 @@ public class ReflectionHelper {
                 return ctor.newInstance();
             }
         } catch (NoSuchMethodException | SecurityException e) {
-            throw new IllegalArgumentException(
-                    String.format("Class %s have no constructor without arguments!", cl.getCanonicalName()));
+            throw new IllegalArgumentException(String.format("Class %s have no constructor without arguments!", cl
+                    .getCanonicalName()));
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
             throw new RuntimeException(e);
@@ -101,13 +100,7 @@ public class ReflectionHelper {
         }
 
         // Sort fields by names.
-        Collections.sort(result, new Comparator<Field>() {
-
-            @Override
-            public int compare(final Field field1, final Field field2) {
-                return field1.getName().compareTo(field2.getName());
-            }
-        });
+        Collections.sort(result, (field1, field2) -> field1.getName().compareTo(field2.getName()));
 
         return result;
     }

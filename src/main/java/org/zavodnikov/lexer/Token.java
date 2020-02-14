@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -66,15 +66,15 @@ public class Token<T extends Enum<T> & TokenType> {
 
         // Start position.
         if (startPosition < -1) {
-            throw new IllegalArgumentException(
-                    String.format("Parameter \"startPosition\" (%s) can not be less than 0", startPosition));
+            throw new IllegalArgumentException(String.format("Parameter \"startPosition\" (%s) can not be less than 0",
+                    startPosition));
         }
         this.startPosition = startPosition;
 
         // End position.
         if (endPosition < -1) {
-            throw new IllegalArgumentException(
-                    String.format("Parameter \"endPosition\" (%s) can not be less than 0", endPosition));
+            throw new IllegalArgumentException(String.format("Parameter \"endPosition\" (%s) can not be less than 0",
+                    endPosition));
         }
         if (endPosition <= startPosition) {
             throw new IllegalArgumentException(String.format(
@@ -123,8 +123,8 @@ public class Token<T extends Enum<T> & TokenType> {
         if (obj instanceof Token<?>) {
             final Token<?> token = (Token<?>) obj;
             //@formatter:off
-            return  getType().equals(token.getType()) 
-                    && getValue().equals(token.getValue()) 
+            return  getType().equals(token.getType())
+                    && getValue().equals(token.getValue())
                     && getStartPosition() == token.getStartPosition()
                     && getEndPosition() == token.getEndPosition();
             //@formatter:on

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,119 +24,208 @@
 package org.zavodnikov.reflection;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 
 /**
+ * Method that makes writing Object methods simpler.
+ *
  * @author Dmitry Zavodnikov (d.zavodnikov@gmail.com)
  */
 public class ObjectHelper {
 
-    private static List<Field> getFields(final Class<?> cl) {
-        final List<Field> fields = ReflectionHelper.getFields(cl);
+    private static final String NULL = "<null>";
 
-        // Clean fields.
-        final Iterator<Field> fieldIterator = fields.iterator();
-        while (fieldIterator.hasNext()) {
-            final Field f = fieldIterator.next();
+    private static final String NL = System.lineSeparator();
 
-            if (Modifier.isStatic(f.getModifiers())) {
-                fieldIterator.remove();
-            }
+    private static final String SHIFT = "    ";
+
+    private static String fieldToString(final Field field, final Object value) {
+        if (value == null) {
+            return NULL;
         }
 
-        return fields;
+        final Class<? extends Field> fieldClass = field.getClass();
+
+        // Boolean
+        if (fieldClass.equals(boolean.class)) {
+            return Boolean.toString(boolean.class.cast(value));
+        }
+        if (fieldClass.equals(Boolean.class)) {
+            return Boolean.class.cast(value).toString();
+        }
+
+        // Byte
+        if (fieldClass.equals(byte.class)) {
+            return Byte.toString(byte.class.cast(value));
+        }
+        if (fieldClass.equals(Byte.class)) {
+            return Byte.class.cast(value).toString();
+        }
+
+        // Character
+        if (fieldClass.equals(char.class)) {
+            return Character.toString(char.class.cast(value));
+        }
+        if (fieldClass.equals(Character.class)) {
+            return Character.class.cast(value).toString();
+        }
+
+        // Short
+        if (fieldClass.equals(short.class)) {
+            return Short.toString(short.class.cast(value));
+        }
+        if (fieldClass.equals(Short.class)) {
+            return Short.class.cast(value).toString();
+        }
+
+        // Integer
+        if (fieldClass.equals(int.class)) {
+            return Integer.toString(int.class.cast(value));
+        }
+        if (fieldClass.equals(Integer.class)) {
+            return Integer.class.cast(value).toString();
+        }
+
+        // Float
+        if (fieldClass.equals(float.class)) {
+            return Float.toString(float.class.cast(value));
+        }
+        if (fieldClass.equals(Float.class)) {
+            return Float.class.cast(value).toString();
+        }
+
+        // Long
+        if (fieldClass.equals(long.class)) {
+            return Long.toString(long.class.cast(value));
+        }
+        if (fieldClass.equals(Long.class)) {
+            return Long.class.cast(value).toString();
+        }
+
+        // Double
+        if (fieldClass.equals(double.class)) {
+            return Double.toString(double.class.cast(value));
+        }
+        if (fieldClass.equals(Double.class)) {
+            return Double.class.cast(value).toString();
+        }
+
+        // String
+        if (fieldClass.equals(String.class)) {
+            return String.class.cast(value);
+        }
+
+        return value.toString();
     }
 
-    public static String toString(final Object obj) {
-        if (obj == null) {
-            throw new IllegalArgumentException();
+    private static <R> R processField(final Field field, final Object object,
+            final BiFunction<Field, Object, R> processor) {
+        R result = null;
+
+        final boolean accessible = field.isAccessible();
+        if (!accessible) {
+            field.setAccessible(true);
         }
-
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("%s[", obj.getClass().getSimpleName()));
-
-        final List<Field> fields = ObjectHelper.getFields(obj.getClass());
-
-        for (int i = 0; i < fields.size(); ++i) {
-            try {
-                final Field f = fields.get(i);
-                f.setAccessible(true);
-
-                final Object fieldValue = f.get(obj);
-
-                sb.append(String.format("%s=%s", f.getName(), fieldValue != null ? fieldValue.toString() : "null"));
-
-                if (i < fields.size() - 1) {
-                    sb.append(", ");
-                }
-            } catch (IllegalArgumentException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        try {
+            final Object value = field.get(object);
+            result = processor.apply(field, value);
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
-
-        sb.append("]");
-
-        return sb.toString();
-    }
-
-    public static int hashCode(final Object obj) {
-        if (obj == null) {
-            throw new IllegalArgumentException();
-        }
-
-        final int prime = 31;
-
-        int result = 1;
-
-        for (final Field f : ObjectHelper.getFields(obj.getClass())) {
-            try {
-                f.setAccessible(true);
-
-                final Object fieldValue = f.get(obj);
-
-                result = prime * result + (fieldValue != null ? fieldValue.hashCode() : 0);
-            } catch (IllegalArgumentException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        if (!accessible) {
+            field.setAccessible(accessible);
         }
 
         return result;
     }
 
-    public static boolean equals(final Object obj1, final Object obj2) {
-        if (obj1 == null) {
-            return obj2 == null;
+    private static Object processField(final Field field, final Object object) {
+        return processField(field, object, (f, obj) -> obj);
+    }
+
+    public static String toString(final Object object) {
+        if (object == null) {
+            return NULL;
         }
-        if (obj2 == null) {
+
+        // Header.
+        final StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%s[%s]{", object.getClass().getSimpleName(), Integer.toString(object.hashCode())));
+        sb.append(NL);
+
+        // Collect all fields.
+        final List<Field> fields = new ArrayList<>();
+        Class<?> cl = object.getClass();
+        while (cl != Object.class) {
+            fields.addAll(Arrays.asList(cl.getDeclaredFields()));
+            cl = cl.getSuperclass();
+        }
+
+        // For each filed.
+        for (int i = 0; i < fields.size(); ++i) {
+            final Field field = fields.get(i);
+
+            final String result = processField(field, object, ObjectHelper::fieldToString);
+
+            sb.append(SHIFT);
+            sb.append(String.format("%s=%s", field.getName(), result));
+
+            // Add separator.
+            if (i < fields.size() - 1) {
+                sb.append(",");
+            }
+            sb.append(NL);
+        }
+
+        sb.append("}");
+
+        return sb.toString();
+    }
+
+    public static boolean equals(final Object object1, final Object object2) {
+        if (object1 == null) {
+            return object2 == null;
+        }
+        if (object2 == null) {
+            return object1 == null;
+        }
+
+        if (object1 == object2) {
+            return true;
+        }
+
+        if (!object1.getClass().equals(object2.getClass())) {
             return false;
         }
-        if (obj1 == obj2) {
-            return true;
-        }
-        if (obj1.getClass() == obj2.getClass()) {
-            for (final Field f : ObjectHelper.getFields(obj1.getClass())) {
-                try {
-                    f.setAccessible(true);
 
-                    final Object value1 = f.get(obj1);
-                    final Object value2 = f.get(obj2);
+        for (final Field field : object1.getClass().getDeclaredFields()) {
+            final Object value1 = processField(field, object1);
+            final Object value2 = processField(field, object2);
 
-                    if (value1 != null && !value1.equals(value2)) {
-                        return false;
-                    }
-                    if (value1 == null && value2 != null) {
-                        return false;
-                    }
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    e.printStackTrace();
-                    return false;
-                }
+            if (value1 == null && value2 != null) {
+                return false;
             }
-            return true;
+            if (!value1.equals(value2)) {
+                return false;
+            }
         }
-        return false;
+        return true;
+    }
+
+    public static int hashCode(final Object object) {
+        if (object == null) {
+            return 0;
+        }
+
+        int result = 1;
+        for (final Field field : object.getClass().getDeclaredFields()) {
+            final Object value = processField(field, object);
+
+            result = 31 * result + (value == null ? 0 : value.hashCode());
+        }
+        return result;
     }
 }

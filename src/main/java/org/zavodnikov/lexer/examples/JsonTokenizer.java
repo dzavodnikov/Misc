@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +39,7 @@ import org.zavodnikov.lexer.TokenizationException;
 public class JsonTokenizer {
 
     public enum JSONToken implements TokenType {
+
         //@formatter:off
         WHITESPACE("\\s+", true), // Skip it.
 

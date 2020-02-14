@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,12 +28,12 @@ import alice.tuprolog.SolveInfo;
 
 /**
  * See: https://bitbucket.org/tuprologteam/tuprolog/src/b025eb748c23/Manual/v.3.2.1-tuprolog%20guide/examples/?at=master
- * 
+ *
  * @author Dmitry Zavodnikov (d.zavodnikov@gmail.com)
  */
 public class SimpleCalculation {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(final String[] args) throws Exception {
         final Prolog engine = new Prolog();
         final SolveInfo info = engine.solve("append([1],[2,3],X).");
         System.out.println(info.getSolution());

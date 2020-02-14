@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,6 @@
 package org.zavodnikov.swing;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,39 +40,31 @@ public class SimpleUI extends JFrame {
 
     public SimpleUI() {
 
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         getContentPane().add(panel, BorderLayout.NORTH);
 
-        JButton btnOpen = new JButton("Open Directory");
-        btnOpen.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-            }
+        final JButton btnOpen = new JButton("Open Directory");
+        btnOpen.addActionListener(arg0 -> {
         });
         panel.add(btnOpen);
 
-        JTextPane txtpnNamePattern = new JTextPane();
+        final JTextPane txtpnNamePattern = new JTextPane();
         txtpnNamePattern.setText("Name  pattern");
         panel.add(txtpnNamePattern);
 
-        textField = new JTextField();
-        panel.add(textField);
-        textField.setColumns(10);
+        this.textField = new JTextField();
+        panel.add(this.textField);
+        this.textField.setColumns(10);
 
-        JButton btnNewButton = new JButton("Rename");
-        btnNewButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
+        final JButton btnNewButton = new JButton("Rename");
+        btnNewButton.addActionListener(e -> {
         });
         panel.add(btnNewButton);
 
-        JTree tree = new JTree();
+        final JTree tree = new JTree();
         getContentPane().add(tree, BorderLayout.WEST);
 
-        JScrollPane scrollPane = new JScrollPane();
+        final JScrollPane scrollPane = new JScrollPane();
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 
         setSize(250, 100);
@@ -82,7 +72,7 @@ public class SimpleUI extends JFrame {
 
     private static final long serialVersionUID = -8439351020137387634L;
 
-    private JTextField        textField;
+    private final JTextField textField;
 
     public static void main(final String[] args) {
         final JFrame myWindow = new SimpleUI();

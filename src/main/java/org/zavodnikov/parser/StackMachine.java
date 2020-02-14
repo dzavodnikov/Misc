@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,9 +37,9 @@ import java.util.Stack;
 public class StackMachine {
 
     public static <T> T execute(final List<Element<T>> input) {
-        final Stack<T> stack = new Stack<T>();
+        final Stack<T> stack = new Stack<>();
 
-        for (Element<T> el : input) {
+        for (final Element<T> el : input) {
             if (el instanceof Operand<?>) {
                 final Operand<T> operand = (Operand<T>) el;
                 stack.push(operand.execute());
@@ -54,14 +54,14 @@ public class StackMachine {
                         operands.add(stack.pop());
                     }
                     stack.push(operation.execute(operands));
-                } catch (EmptyStackException e) {
+                } catch (final EmptyStackException e) {
                     throw new IllegalArgumentException("Wrong input expression");
                 }
                 continue;
             }
 
-            throw new IllegalArgumentException(
-                    String.format("Unknown element type \"%s\"", el.getClass().getSimpleName()));
+            throw new IllegalArgumentException(String.format("Unknown element type \"%s\"", el.getClass()
+                    .getSimpleName()));
         }
 
         if (stack.size() != 1) {

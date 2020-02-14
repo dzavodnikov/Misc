@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -73,7 +73,7 @@ public class GenerateXML {
             staff.appendChild(nicknameElement);
 
             return document;
-        } catch (ParserConfigurationException e) {
+        } catch (final ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
     }
@@ -90,7 +90,7 @@ public class GenerateXML {
             transformer.transform(new DOMSource(document), result);
 
             return writer.getBuffer().toString();
-        } catch (TransformerException e) {
+        } catch (final TransformerException e) {
             throw new RuntimeException(e);
         }
     }

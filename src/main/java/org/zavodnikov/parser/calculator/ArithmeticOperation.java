@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,25 +32,26 @@ import org.zavodnikov.parser.Operation;
  * @version 1.0.0
  */
 public enum ArithmeticOperation implements Operation<Double> {
+
     //@formatter:off
     ADDITION {
         @Override
         public Double execute(final List<Double> operands) {
             return operands.get(0) + operands.get(1);
         }
-    }, 
+    },
     SUBTRACTION {
         @Override
         public Double execute(final List<Double> operands) {
             return operands.get(0) - operands.get(1);
         }
-    }, 
+    },
     DIVISION {
         @Override
         public Double execute(final List<Double> operands) {
             return operands.get(0) / operands.get(1);
         }
-    }, 
+    },
     MULTIPLICATION {
         @Override
         public Double execute(final List<Double> operands) {

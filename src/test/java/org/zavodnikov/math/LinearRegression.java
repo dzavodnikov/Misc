@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2019 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,20 +32,20 @@ import org.junit.Test;
  * @author Dmitry Zavodnikov (d.zavodnikov@gmail.com)
  */
 public class LinearRegression {
-    
+
     public static int findValue(final SimpleRegression regression, final double value) {
-        return (int)((value - regression.getIntercept()) / regression.getSlope());
+        return (int) ((value - regression.getIntercept()) / regression.getSlope());
     }
 
     @Test
     public void test1() {
         final SimpleRegression regression = new SimpleRegression();
-        
-        final int[] observations = new int[] { 1, 1, 1, 2, 2, 5, 2, 3, 1};
+
+        final int[] observations = new int[] { 1, 1, 1, 2, 2, 5, 2, 3, 1 };
         for (int i = 0; i < observations.length; ++i) {
             regression.addData(i + 1, observations[i]);
         }
-        
+
         final int predictTime = observations.length + 1;
         //final double predict = regression.getSlope() * predictTime + regression.getIntercept();
         System.out.println(regression.predict(predictTime));

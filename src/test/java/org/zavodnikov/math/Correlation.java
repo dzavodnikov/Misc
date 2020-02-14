@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2019 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,13 +32,13 @@ import org.apache.commons.math3.stat.correlation.SpearmansCorrelation;
 import org.junit.Test;
 
 /**
- * Tests for {@link Covariance}, {@link PearsonsCorrelation}, {@link SpearmansCorrelation}, 
+ * Tests for {@link Covariance}, {@link PearsonsCorrelation}, {@link SpearmansCorrelation},
  * {@link KendallsCorrelation}.
  *
  * @author Dmitry Zavodnikov (d.zavodnikov@gmail.com)
  */
 public class Correlation {
-    
+
     private double compare(final int[] pattern, final int[] sample) {
         final double[] patternCast = Arrays.stream(pattern).asDoubleStream().toArray();
         final double[] sampleCast = Arrays.stream(sample).asDoubleStream().toArray();
@@ -51,15 +51,15 @@ public class Correlation {
 
     @Test
     public void test1() {
-        final int[] pattern = new int[] {1, 10, 1};
-        final int[] sample1 = new int[] {1, 10, 1};
-        final int[] sample2 = new int[] {1, 9, 1};
-        final int[] sample3 = new int[] {1, 6, 1};
-        final int[] sample4 = new int[] {1, 3, 1};
-        final int[] sample5 = new int[] {1, 1, 1};
-        final int[] sample6 = new int[] {12, 13, 9};
-        final int[] sample7 = new int[] {120, 132, 111};
-        
+        final int[] pattern = new int[] { 1, 10, 1 };
+        final int[] sample1 = new int[] { 1, 10, 1 };
+        final int[] sample2 = new int[] { 1, 9, 1 };
+        final int[] sample3 = new int[] { 1, 6, 1 };
+        final int[] sample4 = new int[] { 1, 3, 1 };
+        final int[] sample5 = new int[] { 1, 1, 1 };
+        final int[] sample6 = new int[] { 12, 13, 9 };
+        final int[] sample7 = new int[] { 120, 132, 111 };
+
         System.out.println(compare(pattern, sample1));
         System.out.println(compare(pattern, sample2));
         System.out.println(compare(pattern, sample3));

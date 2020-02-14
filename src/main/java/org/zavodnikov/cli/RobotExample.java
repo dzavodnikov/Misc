@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import java.awt.event.KeyEvent;
 /**
  * Example of usage <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Robot.html">Robot</a>. More examples
  * available <a href="http://jexp.ru/index.php/Java_Tutorial/Development/Robot">here</a>.
- * 
+ *
  * @author Dmitry Zavodnikov (d.zavodnikov@gmail.com)
  */
 public class RobotExample {
@@ -42,7 +42,7 @@ public class RobotExample {
     public RobotExample() {
         try {
             this.robot = new Robot();
-        } catch (AWTException e) {
+        } catch (final AWTException e) {
             throw new RuntimeException(e);
         }
     }
@@ -59,7 +59,7 @@ public class RobotExample {
 
     public void pressKey(final int... keyCodes) {
         System.out.println("Start printing");
-        for (int kc : keyCodes) {
+        for (final int kc : keyCodes) {
             pressKey(kc);
         }
         System.out.println("End printing");
@@ -73,12 +73,12 @@ public class RobotExample {
 
         //@formatter:off
         robotExample.pressKey(
-                KeyEvent.VK_H, 
-                KeyEvent.VK_I, 
-                KeyEvent.VK_SPACE, 
-                KeyEvent.VK_D, 
+                KeyEvent.VK_H,
                 KeyEvent.VK_I,
-                KeyEvent.VK_M, 
+                KeyEvent.VK_SPACE,
+                KeyEvent.VK_D,
+                KeyEvent.VK_I,
+                KeyEvent.VK_M,
                 KeyEvent.VK_A
             );
         //@formatter:on

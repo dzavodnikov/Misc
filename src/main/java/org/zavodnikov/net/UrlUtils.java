@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,10 +34,13 @@ public class UrlUtils {
 
     /**
      * Analog of <code>encodeURIComponent(value).replace(new RegExp('%20', 'g'), '+').replace(new RegExp('%C2%A0', 'g'),
-     * '+')</code> form JavaScript. <p> See <a href="https://stackoverflow.com/questions/607176/">Java equivalent to
+     * '+')</code> form JavaScript.
+     * <p>
+     * See <a href="https://stackoverflow.com/questions/607176/">Java equivalent to
      * JavaScript's encodeURIComponent that produces identical output</a> and <a
      * href="https://stackoverflow.com/questions/1634271/">URL encoding the space character: + or %20?</a> for more
-     * details. </p>
+     * details.
+     * </p>
      */
     public static String encode(final String value) {
         if (value == null || value.isEmpty()) {
@@ -61,10 +64,13 @@ public class UrlUtils {
     }
 
     /**
-     * Analog of <code>decodeURIComponent(value).replace(new RegExp('\\+', 'g'), ' ')</code> form JavaScript. <p> See <a
+     * Analog of <code>decodeURIComponent(value).replace(new RegExp('\\+', 'g'), ' ')</code> form JavaScript.
+     * <p>
+     * See <a
      * href="https://stackoverflow.com/questions/607176/">Java equivalent to JavaScript's encodeURIComponent that
      * produces identical output</a> and <a href="https://stackoverflow.com/questions/1634271/">URL encoding the space
-     * character: + or %20?</a> for more details. </p>
+     * character: + or %20?</a> for more details.
+     * </p>
      */
     public static String decode(final String value) {
         if (value == null || value.isEmpty()) {

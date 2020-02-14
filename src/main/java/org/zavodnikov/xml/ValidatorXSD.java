@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -72,16 +72,16 @@ public class ValidatorXSD {
             throw new IllegalArgumentException("Content of XSD file for checking can not be null or empty!");
         }
 
-        return validateXmlByXsd(new ByteArrayInputStream(xmlContent.getBytes()),
-                new ByteArrayInputStream(xsdContent.getBytes()));
+        return validateXmlByXsd(new ByteArrayInputStream(xmlContent.getBytes()), new ByteArrayInputStream(xsdContent
+                .getBytes()));
     }
 
     public static void main(final String[] args) throws IOException {
         final OptionParser parser = new OptionParser();
-        final OptionSpec<String> xmlOpt = parser.accepts("xml", "XML file for validation").withRequiredArg()
-                .ofType(String.class);
-        final OptionSpec<String> xsdOpt = parser.accepts("xsd", "XSD file with definition").withRequiredArg()
-                .ofType(String.class);
+        final OptionSpec<String> xmlOpt = parser.accepts("xml", "XML file for validation").withRequiredArg().ofType(
+                String.class);
+        final OptionSpec<String> xsdOpt = parser.accepts("xsd", "XSD file with definition").withRequiredArg().ofType(
+                String.class);
 
         final OptionSet options = parser.parse(args);
         if (options.has(xmlOpt) && options.has(xsdOpt)) {

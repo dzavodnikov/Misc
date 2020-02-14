@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2017-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import net.sf.expectit.matcher.Matchers;
  */
 public class Pipe {
 
-    private static final String EXEC_PATH   = "/home/dima/Programming/Python/Pipe/main";
+    private static final String EXEC_PATH = "/home/dima/Programming/Python/Pipe/main";
 
     private static final String EXEC_PROMPT = "Enter string> ";
 

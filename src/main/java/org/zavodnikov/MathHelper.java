@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,34 +30,61 @@ package org.zavodnikov;
  */
 public class MathHelper {
 
-    public final static double EXTEND_SCALE   = 2.0;
+    public final static double EXTEND_SCALE = 2.0;
 
-    public final static double REDUCE_SCALE   = 1.0 / (MathHelper.EXTEND_SCALE * MathHelper.EXTEND_SCALE);
+    public final static double REDUCE_SCALE = 1.0 / (MathHelper.EXTEND_SCALE * MathHelper.EXTEND_SCALE);
 
-    public final static int    MIN_ARRAY_SIZE = 8;
+    public final static int MIN_ARRAY_SIZE = 8;
 
     /**
-     * Round value to nearest integer. <p> For example: <ul> <li><code>0.0 --> 0</code></li> <li><code>0.1 -->
-     * 0</code></li> <li><code>0.5 --> 1</code></li> <li><code>0.9 --> 1</code></li> <li><code>1.0 --> 1</code></li>
-     * </ul> </p>
+     * Round value to nearest integer.
+     * <p>
+     * For example:
+     * <ul>
+     * <li><code>0.0 --> 0</code></li>
+     * <li><code>0.1 -->
+     * 0</code></li>
+     * <li><code>0.5 --> 1</code></li>
+     * <li><code>0.9 --> 1</code></li>
+     * <li><code>1.0 --> 1</code></li>
+     * </ul>
+     * </p>
      */
     public static int round(final double value) {
         return (int) Math.round(value);
     }
 
     /**
-     * Round value to greater integer. <p> For example: <ul> <li><code>0.0 --> 0</code></li> <li><code>0.1 -->
-     * 1</code></li> <li><code>0.5 --> 1</code></li> <li><code>0.9 --> 1</code></li> <li><code>1.0 --> 1</code></li>
-     * </ul> </p>
+     * Round value to greater integer.
+     * <p>
+     * For example:
+     * <ul>
+     * <li><code>0.0 --> 0</code></li>
+     * <li><code>0.1 -->
+     * 1</code></li>
+     * <li><code>0.5 --> 1</code></li>
+     * <li><code>0.9 --> 1</code></li>
+     * <li><code>1.0 --> 1</code></li>
+     * </ul>
+     * </p>
      */
     public static int roundUp(final double value) {
         return (int) Math.ceil(value);
     }
 
     /**
-     * Round value to less integer. <p> For example: <ul> <li><code>0.0 --> 0</code></li> <li><code>0.1 -->
-     * 0</code></li> <li><code>0.5 --> 0</code></li> <li><code>0.9 --> 0</code></li> <li><code>1.0 --> 1</code></li>
-     * </ul> </p>
+     * Round value to less integer.
+     * <p>
+     * For example:
+     * <ul>
+     * <li><code>0.0 --> 0</code></li>
+     * <li><code>0.1 -->
+     * 0</code></li>
+     * <li><code>0.5 --> 0</code></li>
+     * <li><code>0.9 --> 0</code></li>
+     * <li><code>1.0 --> 1</code></li>
+     * </ul>
+     * </p>
      */
     public static int roundDown(final double value) {
         return (int) Math.floor(value);

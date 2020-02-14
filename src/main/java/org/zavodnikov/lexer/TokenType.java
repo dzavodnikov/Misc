@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2012-2018 Dmitry Zavodnikov
+ * Copyright (c) 2010-2020 Dmitry Zavodnikov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ public interface TokenType {
 
     /**
      * @return <a href="https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html#cg">capturing group</a>
-     *         pattern. Note: Use zero-width positive lookahead to sole problem with multiple prefix.
+     *             pattern. Note: Use zero-width positive lookahead to sole problem with multiple prefix.
      */
     Pattern getTokenPattern();
 
