@@ -39,8 +39,7 @@ public class JsonReader {
         try {
             return mapper.readValue(jsonString, Map.class);
         } catch (final IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -49,8 +48,7 @@ public class JsonReader {
         try {
             return mapper.readValue(jsonString, cl);
         } catch (final IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(e);
         }
     }
 }
