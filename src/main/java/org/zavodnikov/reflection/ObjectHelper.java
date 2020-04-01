@@ -125,7 +125,7 @@ public class ObjectHelper {
             final BiFunction<Field, Object, R> processor) {
         R result = null;
 
-        final boolean accessible = field.isAccessible();
+        final boolean accessible = field.canAccess(object);
         if (!accessible) {
             field.setAccessible(true);
         }
