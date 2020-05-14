@@ -24,6 +24,7 @@
 package org.zavodnikov.reflection;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -142,10 +143,6 @@ public class ObjectHelper {
         return result;
     }
 
-    private static Object processField(final Field field, final Object object) {
-        return processField(field, object, (f, obj) -> obj);
-    }
-
     public static String toString(final Object object) {
         if (object == null) {
             return NULL;
@@ -168,6 +165,10 @@ public class ObjectHelper {
         for (int i = 0; i < fields.size(); ++i) {
             final Field field = fields.get(i);
 
+            if (Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
+
             final String result = processField(field, object, ObjectHelper::fieldToString);
 
             sb.append(SHIFT);
@@ -183,49 +184,5 @@ public class ObjectHelper {
         sb.append("}");
 
         return sb.toString();
-    }
-
-    public static boolean equals(final Object object1, final Object object2) {
-        if (object1 == null) {
-            return object2 == null;
-        }
-        if (object2 == null) {
-            return object1 == null;
-        }
-
-        if (object1 == object2) {
-            return true;
-        }
-
-        if (!object1.getClass().equals(object2.getClass())) {
-            return false;
-        }
-
-        for (final Field field : object1.getClass().getDeclaredFields()) {
-            final Object value1 = processField(field, object1);
-            final Object value2 = processField(field, object2);
-
-            if (value1 == null && value2 != null) {
-                return false;
-            }
-            if (!value1.equals(value2)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static int hashCode(final Object object) {
-        if (object == null) {
-            return 0;
-        }
-
-        int result = 1;
-        for (final Field field : object.getClass().getDeclaredFields()) {
-            final Object value = processField(field, object);
-
-            result = 31 * result + (value == null ? 0 : value.hashCode());
-        }
-        return result;
     }
 }
